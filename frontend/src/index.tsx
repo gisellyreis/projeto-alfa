@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./pages/App";
+import SelecaoDeTipo from "./pages/SelecaoDeTipo";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<SelecaoDeTipo />, document.getElementById('root'));

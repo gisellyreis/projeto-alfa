@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  // exemplos!
+
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  
+  :root {
+    --white: #fff;
+  
+    --gray-50: #f7f8fa;
+    --gray-100: #e6e8eb;
+    --gray-200: #afb2b1;
+    --gray-500: #808080;
+    --gray-800: #494d4b;
+  
+    --green-500: #04d361;
+  
+    --purple-300: #9f75ff;
+    --purple-400: #9164fa;
+    --purple-500: #8257e5;
+    --purple-800: #6f48c9;
+  }
+  
+  @media (max-width: 1080px) {
+    html {
+      font-size: 93.75%;
+    }
+  }
+  
+  body {
+    background: rgba(225, 225, 225, 0.71);
+    align-items: center;
+    color: #000000;
+  }
+  
+  body,
+  input,
+  textarea
+   {
+    vertical-align: middle;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    color: #000000;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    font-family: Lexend, sans-serif;
+    color: var(--gray-800);
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  padding{
+    padding: 0.2cm
+  }
+
+  button {
+
+    cursor: pointer;
+    background: #C4C4C4;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    text-align: center;
+    color: #000000;
+    padding: 0.1cm;
+    
+  }
+  
