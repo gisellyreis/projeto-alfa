@@ -7,25 +7,25 @@
   // exemplos!
 
   .center {
+    
+    text-align: center;
     margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+
   }
   
   :root {
     --white: #fff;
-  
     --gray-50: #f7f8fa;
     --gray-100: #e6e8eb;
     --gray-200: #afb2b1;
     --gray-500: #808080;
     --gray-800: #494d4b;
-  
     --green-500: #04d361;
-  
     --purple-300: #9f75ff;
     --purple-400: #9164fa;
     --purple-500: #8257e5;
@@ -75,9 +75,6 @@
     font-size: 1.5rem;
   }
   
-  padding{
-    padding: 0.2cm
-  }
 
   button {
 
@@ -91,6 +88,9 @@
     text-align: center;
     color: #000000;
     padding: 0.1cm;
+    margin-right: 0.2cm;
+    margin-left: 0.2cm;
+    margin-top: 0.4cm;
     
   }
   

@@ -10,12 +10,13 @@ class Button extends React.Component {
         label: 'Candidato'	
     };
 
+
   render() {
         return (
 
-                    <div class="center"><center>Você é:</center><padding></padding>
-                        <div>
-                            <button>{this.recrutador.label}</button><padding></padding><padding></padding><button>{this.candidato.label}</button>
+                    <div className = "center"> Você é:
+                        <div> 
+                            <button>{this.recrutador.label}</button><button>{this.candidato.label}</button>
                         </div>
                     </div>
 
