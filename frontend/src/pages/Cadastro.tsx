@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 import { Container } from '@material-ui/core';
 
-import '../styles/global.scss';
+import '../styles/cadastroUsuario.scss';
 
 function SignUp() {
 
