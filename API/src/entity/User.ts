@@ -1,11 +1,4 @@
 // crie aqui a tabela user no mesmo estilo da tabela tasks
-
-enum user_types {
-  candidate,
-  company,
-  professor 
-}
-
 import {
   Column,
   CreateDateColumn,
@@ -13,6 +6,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,Timestamp
 } from "typeorm";
+
+enum user_types {
+  candidate,
+  company,
+  professor 
+}
 
 @Entity()
 export class User {
@@ -22,7 +21,7 @@ export class User {
   @Column()
   type: user_types;
 
-  @Column()
+  @Column({ unique: true })
   primary_email: string; // email ufba (professor ou aluno) ou email normal (empresa)
 
   @Column()
@@ -40,10 +39,10 @@ export class User {
   @Column()
   employee_name: string;
 
-  @Column()
+  @Column({ unique: true })
   registration_number: string; // apenas para user
 
-  @Column()
+  @Column({ unique: true })
   legal_id: string; // cpf ou cnpj
 
   @Column()
