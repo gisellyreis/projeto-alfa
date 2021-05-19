@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SelecaoDeTipo from "./pages/SelecaoDeTipo";
+import CadastroVagas from "./pages/CadastroVagas";
 
-ReactDOM.render(<SelecaoDeTipo />, document.getElementById('root'));
+ReactDOM.render(<CadastroVagas />, document.getElementById('root'));
