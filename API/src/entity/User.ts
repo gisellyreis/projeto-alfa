@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,Timestamp
 } from "typeorm";
 
-enum user_types {
+export enum user_types {
   candidate,
   company,
   professor 
