@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/cadastro_vagas.scss";
 
-class Button extends React.Component {
+class CadastroVagas extends React.Component  {
 
 	recrutador = { 
 			label: 'Recrutador'	
@@ -36,4 +36,4 @@ class Button extends React.Component {
     }
 }
 
-export default Button
+export default CadastroVagas
