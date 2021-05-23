@@ -2,16 +2,17 @@ import { getRepository } from "typeorm";
 import {validate} from "isemail";
 import {User, user_types} from "../entity/User"
 import { Request, Response } from "express";
-import IsEmail = require("isemail");
+import {genSalt,hash, Salt} from "bcrypt";
+
+const ourSalt = genSalt(123123213);
 
 export const getUsers = async (request: Request, response: Response) => {
   const users = await getRepository(User).find();
   return response.json(users);
 };
 
-const hash = (password:string) => {
-  // TODO: ACTUALLY HASH THIS. VERY IMPORTANT.
-  return password;
+const hash = async (password:string, salt:any) => {
+  return await hash(password, salt);
 }
 
 export const createUser = async (request: Request, response: Response) => {
@@ -44,7 +45,7 @@ export const createUser = async (request: Request, response: Response) => {
   if (password.length < 8 /*Escrever mais condicoes para validar a string*/)
     return response.json({ message: "erro: senha invalida" });
     
-  const password_hash = hash(password);
+  const password_hash = hash(password,ourSalt);
   let user: User;
   switch (type) {
     case user_types.candidate:
