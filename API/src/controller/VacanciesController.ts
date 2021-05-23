@@ -2,30 +2,7 @@ import { Request, Response } from "express";
 import { validate } from "isemail";
 import { getRepository } from "typeorm";
 import { Vacancy } from "../entity/Vacancies";
-
-interface VacancyInfo {
-  title: string;
-  description: string;
-  requirements: string[];
-  contact_email: string;
-  provider: string;
-}
-
-const validateVacancyInfo = (vacancy: VacancyInfo) => {
-  const { title, description, requirements, contact_email, provider } = vacancy;
-  if (!title.length) {
-    throw new Error(`Por favor, escreva um título`);
-  }
-  if (!description.length) {
-    throw new Error(`É necessário ter uma descrição válida`);
-  }
-  if (!validate(contact_email)) {
-    throw new Error(`Email não é válido`);
-  }
-  if (!provider.length) {
-    throw new Error(`Quem está oferecendo esta vaga?`);
-  }
-};
+import { validateVacancyInfo } from "../helpers/validations";
 
 export const createVacancy = async (request: Request, response: Response) => {
   const { title, description, requirements, contact_email, provider } =
