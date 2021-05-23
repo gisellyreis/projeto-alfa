@@ -21,7 +21,7 @@ export const createUser = async (request: Request, response: Response) => {
   // TODO validar email com package isemail
   // TODO validar email secundario com package isemail
   // TODO validar password de acordo com as regras que estabelecermos
-  // TODO validar nome????
+  // TODO validar nome???? não
   // TODO validar estado
   // TODO validar CEP
   // TODO validar celular
