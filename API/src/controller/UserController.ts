@@ -16,7 +16,7 @@ export const createUser = async (request: Request, response: Response) => {
   type = Number(type);
   const {
     primary_email,
-    password,
+    password_unhashed,
     legal_name,
     legal_id,
     address,
@@ -27,7 +27,7 @@ export const createUser = async (request: Request, response: Response) => {
     mobile_phone,
   } = request.body;
 
-  const password_hash = hash(password, 10);
+  const password= hash(password_unhashed, 10);
   let user: User;
   switch (type) {
     case user_types.candidate:
@@ -38,6 +38,7 @@ export const createUser = async (request: Request, response: Response) => {
       user = await getRepository(User).save({
         type,
         primary_email,
+        password,
         legal_name,
         registration_number,
         legal_id,
