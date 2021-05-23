@@ -38,7 +38,6 @@ export const createUser = async (request: Request, response: Response) => {
       user = await getRepository(User).save({
         type,
         primary_email,
-        secondary_email,
         legal_name,
         registration_number,
         legal_id,
@@ -56,7 +55,6 @@ export const createUser = async (request: Request, response: Response) => {
       user = await getRepository(User).save({
         type,
         primary_email,
-        secondary_email,
         password,
         legal_name,
         legal_id,
@@ -74,7 +72,6 @@ export const createUser = async (request: Request, response: Response) => {
       user = await getRepository(User).save({
         type,
         primary_email,
-        secondary_email,
         password,
         legal_name,
         legal_id,
@@ -88,7 +85,7 @@ export const createUser = async (request: Request, response: Response) => {
       return response.json({ message: "user created in database", user });
       break;
     default:
-      return response.json({ message: "erro" });
+      throw new Error(`Ocorreu um erro, tente novamente por favor!`);
       break;
   }
 };
