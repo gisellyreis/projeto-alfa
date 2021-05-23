@@ -4,15 +4,12 @@ import { User, user_types } from "../entity/User";
 import { Request, Response } from "express";
 import { genSalt, hash } from "bcrypt";
 import { validate as isValid } from "gerador-validador-cpf";
-import {validateVacancyInfo} from "../helpers/validations"
+import { validateVacancyInfo } from "../helpers/validations";
 
 export const getUsers = async (request: Request, response: Response) => {
   const users = await getRepository(User).find();
   return response.json(users);
 };
-
-
-
 
 export const createUser = async (request: Request, response: Response) => {
   let { type } = request.body;
@@ -101,11 +98,8 @@ export const deleteUser = async (request: Request, response: Response) => {
 
   const user = await getRepository(User).delete(id);
 
-  if (user.affected) {
-    return response.json({ message: "user deleted", user });
-  } else {
-    return response.json({ message: "erro" });
-  }
+  if (!user.affected)
+    throw new Error(`Ocorreu algum erro, por favor tente novamente`);
 };
 
 export const updateUser = async (request: Request, response: Response) => {
@@ -185,9 +179,7 @@ export const updateUser = async (request: Request, response: Response) => {
   }
 
   const user = await getRepository(User).findOne(id);
-  if (update.affected) {
-    return response.json({ message: "user info updated", user });
-  } else {
-    return response.json({ message: "erro" });
+  if (!update.affected) {
+    throw new Error(`Ocorreu algum erro, favor tentar novamente`);
   }
 };
