@@ -58,6 +58,7 @@ export const createUser = async (request: Request, response: Response) => {
         primary_email,
         password,
         legal_name,
+        alternative_name,
         legal_id,
         address,
         area,

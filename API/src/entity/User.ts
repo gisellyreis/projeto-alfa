@@ -24,9 +24,6 @@ export class User {
   @Column({ unique: true })
   primary_email: string; // email ufba (professor ou aluno) ou email normal (empresa)
 
-  @Column()
-  secondary_email: string; // email alternativo
-
   @Column({ type: "varchar", nullable: false })
   password_hash: string;
 
