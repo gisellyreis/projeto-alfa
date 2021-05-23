@@ -5,17 +5,38 @@ import { Request, Response } from "express";
 import { genSalt, hash } from "bcrypt";
 import { validate as isValid } from "gerador-validador-cpf";
 
+export const ESTADOS = ["AC","AL","AP", "AM","BA","CE","DF","ES","GO","MA","MT",
+                        "MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO",
+                        "RR","SC","SP","SE","TO",""];
+
 export const getUsers = async (request: Request, response: Response) => {
   const users = await getRepository(User).find();
   return response.json(users);
 };
+
+const validateGenericUser = (primary_email, password,
+                     legal_name, CEP, mobile_phone,state) => {
+  let validations = 0;
+  if (!validate(primary_email, { minDomainAtoms: 2 }))
+    throw new Error(`Email inválido.`);
+  if (password.length < 8)
+    throw new Error(`Senha inválida, necessita ter mais de 8 caracteres.`);
+  if (legal_name.length < 2)
+    throw new Error(`Nome inválido: muito curto.`);
+  if ((CEP != "" && CEP.length != 8) || Number.isNaN(Number(CEP)))
+    throw new Error(`CEP inválido.`);
+  if (!ESTADOS.includes(state))
+    throw new Error(`Estado inválido.`);
+  if (mobile_phone.length != 11 && mobile_phone.length != 0)
+    throw new Error(`Celular inválido.`);
+}
+
 
 export const createUser = async (request: Request, response: Response) => {
   let { type } = request.body;
   type = Number(type);
   const {
     primary_email,
-    secondary_email,
     password,
     legal_name,
     legal_id,
@@ -26,30 +47,6 @@ export const createUser = async (request: Request, response: Response) => {
     CEP,
     mobile_phone,
   } = request.body;
-  if (!validate(primary_email, { minDomainAtoms: 2 }))
-    return response.json({ message: "erro: email invalido" });
-  // TODO validar email secundario com package isemail
-  // TODO validar password de acordo com as regras que estabelecermos
-  /* Nota por luiz: nao sei como validar o email secundário pois, quando ele
-  ta ausente, nao sei se o request.body vai ter a propriedade como null, como
-  string vazia, como alguma outra coisa. Se alguem puder me dizer depois,
-  agradeco.
-  */
-  if (legal_name.length < 2) {
-    // TODO melhorar validacao de nome
-    return response.json({ message: "erro: nome invalido" });
-  }
-  // TODO validar estado
-  if (CEP.length != 8) {
-    // TODO validar CEP
-    return response.json({ message: "erro: CEP invalido" });
-  }
-  if (mobile_phone.length != 11) {
-    return response.json({ message: "erro: celular invalido" });
-  }
-  // TODO validar password de acordo com as regras que estabelecermos
-  if (password.length < 8 /*Escrever mais condicoes para validar a string*/)
-    return response.json({ message: "erro: senha invalida" });
 
   const password_hash = hash(password, 10);
   let user: User;
