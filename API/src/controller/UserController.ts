@@ -1,6 +1,8 @@
 import { getRepository } from "typeorm";
+import {validate} from "isemail";
 import {User, user_types} from "../entity/User"
 import { Request, Response } from "express";
+import IsEmail = require("isemail");
 
 export const getUsers = async (request: Request, response: Response) => {
   const users = await getRepository(User).find();
@@ -18,13 +20,30 @@ export const createUser = async (request: Request, response: Response) => {
   const {primary_email, secondary_email, password,
          legal_name, legal_id,
          address, area, city, state, CEP, mobile_phone} = request.body;
-  // TODO validar email com package isemail
+  if (!validate(primary_email,{minDomainAtoms: 2}))
+    return response.json({ message: "erro: email invalido" });
   // TODO validar email secundario com package isemail
-  // TODO validar password de acordo com as regras que estabelecermos
-  // TODO validar nome????
+  /* Nota por luiz: nao sei como validar o email secundário pois, quando ele
+  ta ausente, nao sei se o request.body vai ter a propriedade como null, como
+  string vazia, como alguma outra coisa. Se alguem puder me dizer depois,
+  agradeco.
+  */
+  if (legal_name.length < 2){
+    // TODO melhorar validacao de nome
+    return response.json({ message: "erro: nome invalido" });
+  }
   // TODO validar estado
-  // TODO validar CEP
-  // TODO validar celular
+  if (CEP.length != 8){
+    // TODO validar CEP
+    return response.json({ message: "erro: CEP invalido" });
+  }
+  if (mobile_phone.length != 11){
+    return response.json({ message: "erro: celular invalido" });
+  }
+  // TODO validar password de acordo com as regras que estabelecermos
+  if (password.length < 8 /*Escrever mais condicoes para validar a string*/)
+    return response.json({ message: "erro: senha invalida" });
+    
   const password_hash = hash(password);
   let user: User;
   switch (type) {
@@ -32,8 +51,8 @@ export const createUser = async (request: Request, response: Response) => {
       const {registration_number} = request.body;
       // TODO validar numero de matricula
       // TODO validar CPF
-       // TODO: USAR BCRYPT AQUI
-      user = await getRepository(User).save({type, primary_email, secondary_email, ,
+      // TODO: USAR BCRYPT AQUI
+      user = await getRepository(User).save({type, primary_email, secondary_email,
              legal_name, registration_number, legal_id,
              address, area, city, state, CEP, mobile_phone});
       return response.json({message: "user created in database", user});
@@ -55,7 +74,7 @@ export const createUser = async (request: Request, response: Response) => {
       return response.json({message: "user created in database", user});
       break;  
     default:
-      return response.json({ message: "error" });
+      return response.json({ message: "erro" });
       break;
   }
 };
@@ -68,7 +87,7 @@ export const deleteUser = async (request: Request, response: Response) => {
   if(user.affected) {
     return response.json({ message: "user deleted", user });
   } else {
-    return response.json({ message: "error" });
+    return response.json({ message: "erro" });
   }
 }
 
@@ -109,12 +128,12 @@ export const updateUser = async (request: Request, response: Response) => {
       });
       break;
     default:
-      return response.json({ message: "error" });
+      return response.json({ message: "erro: tipo invalido" });
   }
 
   const user = await getRepository(User).findOne(id);
   if (update.affected) {
-    return response.json({ message: "user atualizado", user });
+    return response.json({ message: "user info updated", user });
   } else {
     return response.json({ message: "erro" });
   }
