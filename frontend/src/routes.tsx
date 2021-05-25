@@ -11,8 +11,8 @@ const Routes = () => {
     return (
         <BrowserRouter>
             <Route exact component={Home} path="/" />
-            <Route exact component={CadastroVagas} path="/cadastro-vagas" />
             <Route exact component={CadastroUsuario} path="/cadastro-usuario" />
+            <Route exact component={CadastroVagas} path="/cadastro-vagas" />
         </BrowserRouter>
     )
 }

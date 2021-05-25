@@ -1,39 +1,69 @@
-import React from "react";
-import "../styles/cadastro_vagas.scss";
+import React, { FormEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-class CadastroVagas extends React.Component  {
+import '../styles/styles.scss';
+import Breadcrumb from './Breadcrumb';
 
-	recrutador = { 
-			label: 'Recrutador'	
-	};
-    candidato = { 
-        label: 'Candidato'	
-    };
+function CadastroVagas() {
+
+    const [titulo, setTitulo] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [email, setEmail] = useState('');
+    const [telefone, setTelefone] = useState('');
 
 
-  render() {
-        return (
+    function handleSubmit(e: FormEvent) {
+        e.preventDefault();
 
-            <div className = "form-div">
-                <h2>Cadastro de Vagas</h2>
-                <form>
-                    <label htmlFor="titulo">Título</label>
-                    <input name="titutlo" id="titulo"/>
-                    <label htmlFor="Descrição">Descrição da vaga</label>
-                    <textarea rows={10} cols={50} name="descrição" id="descrição"/>
-                    <label htmlFor="requisitos">Requisitos</label>
-                    <textarea rows={5} cols={50} name="requisitos" id="requisitos"/>
-                    <label htmlFor="tipo">Tipo</label>
-                    <input name="tipo" id="tipo"/>
-                    <label htmlFor="cargaHoraria">Carga horária</label>
-                    <input name="cargaHoraria" id="cargaHoraria"/>
-                    <label htmlFor="faixaSalarial">Faixa Salarial</label>
-                    <input name="faixaSalarial" id="faixaSalarial"/>
-                </form>
-            </div>
+        console.log({
+            titulo,
+            descricao,
+            email,
+            telefone
+        });
 
-        )
     }
+
+    return (
+        <div className="content">
+            <Breadcrumb></Breadcrumb>
+            <div className="container">
+
+                <h1>Cadastro de Vagas</h1>
+
+                <form onSubmit={handleSubmit} >
+
+                    <div className="mb-3">
+                        <label htmlFor="exampleFormControlInput1" className="form-label">Título</label>
+                        <input className="form-control" type="text" placeholder="" onChange={(e) => { setTitulo(e.target.value) }} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="exampleFormControlTextarea1" className="form-label">Descrição</label>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" rows={3} onChange={(e) => { setDescricao(e.target.value) }} ></textarea>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="exampleInputEmail1" className="form-label">E-mail</label>
+                        <input type="email" className="form-control" id="email" placeholder="name@example.com" onChange={(e) => { setEmail(e.target.value) }} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="exampleFormControlInput1" className="form-label">Telefone</label>
+                        <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="(99) 99999-9999" onChange={(e) => { setTelefone(e.target.value) }} />
+                    </div>
+
+                    <div className="row row-cols-2">
+                        <div className="mb-3">
+                            <button type="submit" className="btn-submit form-control btn btn-primary">Salvar</button>
+                        </div>
+                        <div className="mb-3">
+                            <Link to="/" > <button className="btn-submit form-control btn btn-secondary"> Cancelar</button> </Link>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    );
+
 }
 
-export default CadastroVagas
+export default CadastroVagas;
