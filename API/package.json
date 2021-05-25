@@ -10,8 +10,12 @@
     "typescript": "3.3.3333"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
+    "gerador-validador-cpf": "^5.0.1",
+    "isemail": "^3.2.0",
     "pg": "^8.4.0",
     "postgres": "^1.0.2",
     "reflect-metadata": "^0.1.10",
