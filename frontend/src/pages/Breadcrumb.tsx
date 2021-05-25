@@ -11,6 +11,7 @@ function Breadcrumb() {
                     <li className="breadcrumb-item"><a href="/">Home</a></li>
                     <li className="breadcrumb-item" aria-current="page"><a href="/cadastro-usuario">Novo Usuário</a></li>
                     <li className="breadcrumb-item" aria-current="page"><a href="/cadastro-vagas">Nova Vaga</a></li>
+                    <li className="breadcrumb-item" aria-current="page"><a href="/lista-vagas">Lista de Vagas</a></li>
                 </ol>
             </nav>
         </div>
