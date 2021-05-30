@@ -128,6 +128,7 @@ export const createUser = async (request: Request, response: Response) => {
         break;
     }
   } catch (error) {
+    response.statusCode = 400;
     return response.json({error:{"message":error.message}});
   }
 };
