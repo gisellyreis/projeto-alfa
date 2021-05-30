@@ -18,7 +18,7 @@ export class Vacancy {
   description: string;
 
   @Column()
-  requirements: string[];
+  requirements: string;
 
   @Column()
   contact_email: string;
