@@ -27,7 +27,7 @@ export const createUser = async (request: Request, response: Response) => {
     mobile_phone,
   } = request.body;
 
-  const password= hash(password_unhashed, 10);
+  const password_hash= await hash(password_unhashed, 10);
   let user: User;
   switch (type) {
     case user_types.candidate:
@@ -38,7 +38,7 @@ export const createUser = async (request: Request, response: Response) => {
       user = await getRepository(User).save({
         type,
         primary_email,
-        password,
+        password_hash,
         legal_name,
         registration_number,
         legal_id,
@@ -48,6 +48,8 @@ export const createUser = async (request: Request, response: Response) => {
         state,
         CEP,
         mobile_phone,
+        alternative_name: "",
+        employee_name: "",
       });
       return response.json({ message: "user created in database", user });
       break;
@@ -56,7 +58,7 @@ export const createUser = async (request: Request, response: Response) => {
       user = await getRepository(User).save({
         type,
         primary_email,
-        password,
+        password_hash,
         legal_name,
         alternative_name,
         legal_id,
@@ -74,7 +76,7 @@ export const createUser = async (request: Request, response: Response) => {
       user = await getRepository(User).save({
         type,
         primary_email,
-        password,
+        password_hash,
         legal_name,
         legal_id,
         address,
