@@ -107,7 +107,6 @@ export const updateUser = async (request: Request, response: Response) => {
   const {
     id,
     primary_email,
-    secondary_email,
     legal_name,
     legal_id,
     address,
@@ -130,7 +129,6 @@ export const updateUser = async (request: Request, response: Response) => {
       const { registration_number } = request.body;
       update = await getRepository(User).update(id, {
         primary_email,
-        secondary_email,
         legal_name,
         legal_id,
         address,
@@ -146,7 +144,6 @@ export const updateUser = async (request: Request, response: Response) => {
       const { alternative_name, employee_name } = request.body;
       update = await getRepository(User).update(id, {
         primary_email,
-        secondary_email,
         legal_name,
         legal_id,
         address,
@@ -162,7 +159,6 @@ export const updateUser = async (request: Request, response: Response) => {
     case user_types.professor:
       update = await getRepository(User).update(id, {
         primary_email,
-        secondary_email,
         legal_name,
         legal_id,
         address,
