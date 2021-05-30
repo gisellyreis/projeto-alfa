@@ -4,7 +4,7 @@ import { User, user_types } from "../entity/User";
 import { Request, Response } from "express";
 import { genSalt, hash } from "bcrypt";
 import { validate as isValid } from "gerador-validador-cpf";
-import { validateVacancyInfo } from "../helpers/validations";
+import { validateVacancyInfo,validateCompanyUser,validateProfessorUser,validateCandidateUser } from "../helpers/validations";
 
 export const getUsers = async (request: Request, response: Response) => {
   const users = await getRepository(User).find();
@@ -35,6 +35,14 @@ export const createUser = async (request: Request, response: Response) => {
       // TODO validar numero de matricula
       // TODO validar CPF
       // TODO: USAR BCRYPT AQUI
+      validateCandidateUser(type, primary_email,password_hash,legal_name, registration_number,
+        legal_id,
+        address,
+        area,
+        city,
+        state,
+        CEP,
+        mobile_phone);
       user = await getRepository(User).save({
         type,
         primary_email,
@@ -55,10 +63,21 @@ export const createUser = async (request: Request, response: Response) => {
       break;
     case user_types.company:
       const { alternative_name, employee_name } = request.body;
+      validateCompanyUser(type,
+        primary_email,
+        password_unhashed,
+        legal_name,
+        legal_id,
+        address,
+        area,
+        city,
+        state,
+        CEP,
+        mobile_phone);
       user = await getRepository(User).save({
         type,
         primary_email,
-        password_hash,
+        password_unhashed,
         legal_name,
         alternative_name,
         legal_id,
@@ -68,11 +87,23 @@ export const createUser = async (request: Request, response: Response) => {
         state,
         CEP,
         mobile_phone,
+        registration_number: "",
       });
       return response.json({ message: "user created in database", user });
       break;
     case user_types.professor:
       legal_id.valida("123.456.789-00");
+      validateProfessorUser(type,
+        primary_email,
+        password_unhashed,
+        legal_name,
+        legal_id,
+        address,
+        area,
+        city,
+        state,
+        CEP,
+        mobile_phone);
       user = await getRepository(User).save({
         type,
         primary_email,
@@ -85,6 +116,9 @@ export const createUser = async (request: Request, response: Response) => {
         state,
         CEP,
         mobile_phone,
+        registration_number: "",
+        alternative_name: "",
+        employee_name: "",
       });
       return response.json({ message: "user created in database", user });
       break;
