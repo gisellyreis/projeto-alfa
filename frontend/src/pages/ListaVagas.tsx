@@ -3,7 +3,7 @@ import Breadcrumb from './Breadcrumb';
 
 import '../styles/styles.scss';
 
-const ListaVagas = () => {
+function ListaVagas() {
 
     const vagas = [
         {

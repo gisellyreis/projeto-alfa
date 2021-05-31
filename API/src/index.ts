@@ -7,7 +7,7 @@ import routes from "./routes";
 const app = express();
 createConnection();
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(routes);
 
 app.listen(3333);
