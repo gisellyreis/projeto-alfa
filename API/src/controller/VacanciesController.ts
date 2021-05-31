@@ -7,8 +7,8 @@ import { validateVacancyInfo } from "../helpers/validations";
 export const createVacancy = async (request: Request, response: Response) => {
   const { title, description, requirements, contact_email, provider } =
     request.body;
-
-  validateVacancyInfo({
+  try{
+      validateVacancyInfo({
     title,
     description,
     requirements,
@@ -23,6 +23,11 @@ export const createVacancy = async (request: Request, response: Response) => {
     contact_email,
     provider,
   });
+  }catch(error){
+    response.statusCode = 400;
+    return response.json({error:{"message":error.message}});
+  }
+
 };
 
 export const getVacancies = async (request: Request, response: Response) => {
