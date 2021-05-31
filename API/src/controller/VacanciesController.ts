@@ -16,13 +16,14 @@ export const createVacancy = async (request: Request, response: Response) => {
     provider,
   });
 
-  await getRepository(Vacancy).save({
+  let vacancy = await getRepository(Vacancy).save({
     title,
     description,
     requirements,
     contact_email,
     provider,
   });
+  return response.json({ message: "vacancy created in database", vacancy });
   }catch(error){
     response.statusCode = 400;
     return response.json({error:{"message":error.message}});
