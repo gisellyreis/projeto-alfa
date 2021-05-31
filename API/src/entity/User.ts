@@ -36,10 +36,10 @@ export class User {
   @Column()
   employee_name: string;
 
-  @Column({ unique: true })
+  @Column()
   registration_number: string; // apenas para user
 
-  @Column({ unique: true })
+  @Column()
   legal_id: string; // cpf ou cnpj
 
   @Column()
