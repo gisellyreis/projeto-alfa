@@ -1,15 +1,19 @@
 import React, { FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import api from '../services/api';
 
 import '../styles/styles.scss';
 import Breadcrumb from './Breadcrumb';
 
 function CadastroVagas() {
 
+    const history = useHistory();
+
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [email, setEmail] = useState('');
-    const [telefone, setTelefone] = useState('');
+    const [requirements, setRequirements] = useState('');
+    const [provider, setProvider] = useState('');
 
 
     function handleSubmit(e: FormEvent) {
@@ -18,9 +22,24 @@ function CadastroVagas() {
         console.log({
             titulo,
             descricao,
+            requirements,
             email,
-            telefone
+            provider,
         });
+
+        api.post('vagas', {
+            title: titulo,
+            description: descricao,
+            requirements,
+            contact_email: email,
+            provider,
+        }).then(() => {
+            //alert('Cadastro realizado com sucesso!');
+
+            history.push('/confirma');
+        }).catch(() => {
+            alert('Erro no cadastro!');
+        })
 
     }
 
@@ -46,8 +65,12 @@ function CadastroVagas() {
                         <input type="email" className="form-control" id="email" placeholder="name@example.com" onChange={(e) => { setEmail(e.target.value) }} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleFormControlInput1" className="form-label">Telefone</label>
-                        <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="(99) 99999-9999" onChange={(e) => { setTelefone(e.target.value) }} />
+                        <label htmlFor="exampleFormControlInput1" className="form-label">Requerimentos</label>
+                        <input type="text" className="form-control" id="exampleFormControlInput1"  onChange={(e) => { setRequirements(e.target.value) }} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="exampleFormControlInput1" className="form-label">Empresa</label>
+                        <input type="text" className="form-control" id="exampleFormControlInput1"  onChange={(e) => { setProvider(e.target.value) }} />
                     </div>
 
                     <div className="row row-cols-2">

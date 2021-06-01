@@ -1,5 +1,6 @@
 import React from 'react';
 import Breadcrumb from './Breadcrumb';
+import ListaVagas from './ListaVagas';
 
 const Home = () => {
     return (

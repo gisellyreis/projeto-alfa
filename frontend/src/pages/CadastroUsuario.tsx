@@ -12,7 +12,9 @@ function CadastroUsuario() {
     const [fullName, setFullName] = useState('');
     const [cpf, setCpf] = useState('');
 
-    const [address, setAddress] = useState({});
+    const [address, setAddress] = useState({
+
+    });
     const [cel, setCel] = useState('');
 
 
@@ -255,11 +257,16 @@ function CadastroUsuario() {
                                             </div>
 
 
-                                            <div className="mb-3">
-                                                <label htmlFor="exampleInputText1" className="form-label"> Salvar </label>
-                                                <button type="submit" className="btn-submit form-control btn btn-primary">Salvar</button>
+                                            <div className="row row-cols-2">
+                                                <div className="mb-3">
+                                                    <button type="submit" className="btn-submit form-control btn btn-primary">Salvar</button>
+                                                </div>
+                                                <div className="mb-3">
+                                                    <Link to="/" > <button className="btn-submit form-control btn btn-secondary"> Cancelar</button> </Link>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -350,11 +357,16 @@ function CadastroUsuario() {
                                             </div>
 
 
-                                            <div className="mb-3">
-                                                <label htmlFor="exampleInputText1" className="form-label"> Salvar </label>
-                                                <button type="submit" className="btn-submit form-control btn btn-primary">Salvar</button>
+                                            <div className="row row-cols-2">
+                                                <div className="mb-3">
+                                                    <button type="submit" className="btn-submit form-control btn btn-primary">Salvar</button>
+                                                </div>
+                                                <div className="mb-3">
+                                                    <Link to="/" > <button className="btn-submit form-control btn btn-secondary"> Cancelar</button> </Link>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
 

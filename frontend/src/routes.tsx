@@ -3,6 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 
 import CadastroUsuario from './pages/CadastroUsuario';
 import CadastroVagas from './pages/CadastroVagas';
+import Confirma from './pages/Confirma';
 import Home from './pages/Home';
 import ListaVagas from './pages/ListaVagas';
 
@@ -15,6 +16,7 @@ const Routes = () => {
             <Route exact component={CadastroUsuario} path="/cadastro-usuario" />
             <Route exact component={CadastroVagas} path="/cadastro-vagas" />
             <Route exact component={ListaVagas} path="/lista-vagas" />
+            <Route exact component={Confirma} path="/confirma" />
         </BrowserRouter>
     )
 }
