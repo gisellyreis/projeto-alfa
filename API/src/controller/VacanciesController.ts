@@ -5,6 +5,9 @@ import { Vacancy } from "../entity/Vacancies";
 import { validateVacancyInfo } from "../helpers/validations";
 
 export const createVacancy = async (request: Request, response: Response) => {
+  /* Cria uma vaga e retorna as informações dela se todos os dados recebidos no
+  request forem válidos. Senão, retorna uma mensagem de erro na resposta
+  com o código 400. */
   const { title, description, requirements, contact_email, provider } =
     request.body;
   try{
@@ -32,11 +35,13 @@ export const createVacancy = async (request: Request, response: Response) => {
 };
 
 export const getVacancies = async (request: Request, response: Response) => {
+  /* TODO: completar implementação */
   const slots = await getRepository(Vacancy).find();
   return response.json(slots);
 };
 
 export const updateVacancy = async (request: Request, response: Response) => {
+  /* TODO: completar implementação */
   const { title, description, requirements, contact_email, provider } =
     request.body;
   const { id } = request.params;
@@ -63,6 +68,7 @@ export const updateVacancy = async (request: Request, response: Response) => {
 };
 
 export const deleteVacancy = async (request: Request, response: Response) => {
+  /* TODO: completar implementação */
   const { id } = request.params;
 
   const isDeleted = await getRepository(Vacancy).delete(id);
