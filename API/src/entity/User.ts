@@ -37,22 +37,24 @@ export class User {
   employee_name: string;
 
   @Column()
-  registration_number: string; // apenas para user
+  registration_number: string; 
+  // apenas para candidato, não único pois pode ser nulo para outros tipos de user
 
   @Column()
-  legal_id: string; // cpf ou cnpj
+  legal_id: string; 
+  // cpf ou cnpj. TODO: ativar validação {unique:true}
 
   @Column()
   address: string; // primeira linha do endereço (ex: rua + numero + complemento)
 
   @Column()
-  area: string; // area
+  area: string; // area (bairro)
 
   @Column()
   city: string; //
 
   @Column()
-  state: string; // usar um object com todas as siglas e nomes extensos para validar, tipo {"BA":"Bahia"}
+  state: string; // pode ser string vazia ou uma sigla de estado (maiúscula)
 
   @Column()
   CEP: string;
