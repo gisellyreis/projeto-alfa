@@ -145,7 +145,7 @@ export const createUser = async (request: Request, response: Response) => {
 };
 
 export const deleteUser = async (request: Request, response: Response) => {
-  // TODO: completar
+  /* TODO: completar implementação */
   const { id } = request.params;
 
   const user = await getRepository(User).delete(id);
