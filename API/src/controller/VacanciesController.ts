@@ -31,9 +31,8 @@ export const getVacancies = async (request: Request, response: Response) => {
 };
 
 export const updateVacancy = async (request: Request, response: Response) => {
-  const { title, description, requirements, contact_email, provider } =
+  const { id, title, description, requirements, contact_email, provider } =
     request.body;
-  const { id } = request.params;
 
   validateVacancyInfo({
     title,
@@ -57,7 +56,7 @@ export const updateVacancy = async (request: Request, response: Response) => {
 };
 
 export const deleteVacancy = async (request: Request, response: Response) => {
-  const { id } = request.params;
+  const { id } = request.body;
 
   const isDeleted = await getRepository(Vacancy).delete(id);
 
