@@ -4,6 +4,14 @@ import { getRepository } from "typeorm";
 import { Vacancy } from "../entity/Vacancies";
 import { validateVacancyInfo } from "../helpers/validations";
 
+export interface VacancyInfo {
+  title: string;
+  description: string;
+  requirements: string[];
+  contact_email: string;
+  provider: string;
+}
+
 export const createVacancy = async (request: Request, response: Response) => {
   const { title, description, requirements, contact_email, provider } =
     request.body;
@@ -26,8 +34,8 @@ export const createVacancy = async (request: Request, response: Response) => {
 };
 
 export const getVacancies = async (request: Request, response: Response) => {
-  const slots = await getRepository(Vacancy).find();
-  return response.json(slots);
+  const vacancies = await getRepository(Vacancy).find();
+  return response.json(vacancies);
 };
 
 export const updateVacancy = async (request: Request, response: Response) => {
