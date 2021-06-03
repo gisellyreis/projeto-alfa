@@ -66,4 +66,60 @@ export const validateGenericUser = (
   if (!ESTADOS.includes(state)) throw new Error(`Estado inválido.`);
   if (mobile_phone.length != 11 && mobile_phone.length != 0)
     throw new Error(`Celular inválido.`);
+<<<<<<< HEAD
 };
+=======
+}
+
+export const validateCandidateUser = (type,
+        primary_email,
+        password,
+        legal_name,
+        registration_number,
+        legal_id,
+        address,
+        area,
+        city,
+        state,
+        CEP,
+        mobile_phone) => {
+  validateGenericUser(primary_email, password,
+                     legal_name, CEP, mobile_phone,state);
+  // TODO: validar se email é ufba
+  // TODO: validar se numero de matricula tem 9 chars e é numero
+  // TODO: validar CPF
+}
+
+
+export const validateProfessorUser = (type,
+        primary_email,
+        password,
+        legal_name,
+        legal_id,
+        address,
+        area,
+        city,
+        state,
+        CEP,
+        mobile_phone) => {
+  validateGenericUser(primary_email, password,
+                     legal_name, CEP, mobile_phone,state);
+  // TODO: validar se email é ufba
+  // TODO: validar CPF
+}
+export const validateCompanyUser = (type,
+        primary_email,
+        password,
+        legal_name,
+        legal_id,
+        address,
+        area,
+        city,
+        state,
+        CEP,
+        mobile_phone) => {
+  validateGenericUser(primary_email, password,
+                     legal_name, CEP, mobile_phone,state);
+  // TODO: validar CNPJ
+}
+>>>>>>> 1904256f96095953dd88ba73aa1db288f36a648b

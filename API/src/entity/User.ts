@@ -24,9 +24,6 @@ export class User {
   @Column({ unique: true })
   primary_email: string; // email ufba (professor ou aluno) ou email normal (empresa)
 
-  @Column()
-  secondary_email: string; // email alternativo
-
   @Column({ type: "varchar", nullable: false })
   password_hash: string;
 
@@ -39,23 +36,25 @@ export class User {
   @Column()
   employee_name: string;
 
-  @Column({ unique: true })
-  registration_number: string; // apenas para user
+  @Column()
+  registration_number: string; 
+  // apenas para candidato, não único pois pode ser nulo para outros tipos de user
 
-  @Column({ unique: true })
-  legal_id: string; // cpf ou cnpj
+  @Column()
+  legal_id: string; 
+  // cpf ou cnpj. TODO: ativar validação {unique:true}
 
   @Column()
   address: string; // primeira linha do endereço (ex: rua + numero + complemento)
 
   @Column()
-  area: string; // area
+  area: string; // area (bairro)
 
   @Column()
   city: string; //
 
   @Column()
-  state: string; // usar um object com todas as siglas e nomes extensos para validar, tipo {"BA":"Bahia"}
+  state: string; // pode ser string vazia ou uma sigla de estado (maiúscula)
 
   @Column()
   CEP: string;
